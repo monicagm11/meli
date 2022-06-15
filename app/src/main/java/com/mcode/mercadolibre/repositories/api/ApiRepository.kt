@@ -31,5 +31,24 @@ class ApiRepository {
         }
     }
 
+    fun getProductDetail(productId: String, onSuccess: (ProductResponse)-> Unit, onFailure: () -> Unit){
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+
+                var call = apiInterface.getProductDetail(productId).execute()
+
+                if(call.isSuccessful){
+                    var body = call.body()
+                    onSuccess(body)
+                }else{
+                    onFailure()
+                }
+
+            }catch (e: Exception){
+                e.message
+                onFailure()
+            }
+        }
+    }
 
 }
