@@ -1,4 +1,7 @@
+package com.mcode.mercadolibre.models.api
+
 import com.google.gson.annotations.SerializedName
+import com.mcode.mercadolibre.models.api.Address
 
 data class Results (
 

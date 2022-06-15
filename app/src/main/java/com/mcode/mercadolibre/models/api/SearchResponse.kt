@@ -1,6 +1,8 @@
+package com.mcode.mercadolibre.models.api
+
 import com.google.gson.annotations.SerializedName
 
-data class SearchResult (
+data class SearchResponse (
 
 	@SerializedName("site_id") val siteId : String,
 	@SerializedName("country_default_time_zone") val countryDefaultTimeZone : String,

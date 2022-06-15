@@ -1,3 +1,5 @@
+package com.mcode.mercadolibre.models.api
+
 import com.google.gson.annotations.SerializedName
 
 data class Prices (
@@ -14,5 +16,6 @@ data class PriceItem(
 	@SerializedName("id") val id : String,
 	@SerializedName("type") val type : String,
 	@SerializedName("amount") val amount : Int,
+	@SerializedName("regular_amount") val regularAmount : Int,
 	@SerializedName("currency_id") val currencyId : String
 )

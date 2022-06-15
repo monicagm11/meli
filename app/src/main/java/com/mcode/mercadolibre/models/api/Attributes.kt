@@ -1,3 +1,5 @@
+package com.mcode.mercadolibre.models.api
+
 import com.google.gson.annotations.SerializedName
 
 data class Attributes (
@@ -10,17 +12,17 @@ data class Attributes (
 	@SerializedName("name") val name : String,
 	@SerializedName("value_struct") val valueStruct : Struct,
 	@SerializedName("attribute_group_id") val attributeGroupId : String,
-	@SerializedName("source") val source : Int
+	@SerializedName("source") val source : Long
 )
 
 data class ValueAttributes(
 	@SerializedName("id") val id : String,
 	@SerializedName("name") val name : String,
 	@SerializedName("value_struct") val valueStruct : Struct,
-	@SerializedName("source") val source : Int
+	@SerializedName("source") val source : Long
 )
 
 data class Struct(
-	@SerializedName("number") val number : Int,
+	@SerializedName("number") val number : Float,
 	@SerializedName("unit") val unit : String
 )
