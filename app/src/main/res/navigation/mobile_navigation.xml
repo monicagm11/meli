@@ -3,10 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/main_fragment">
+    app:startDestination="@id/mainFragment">
 
     <fragment
-        android:id="@+id/main_fragment"
+        android:id="@+id/mainFragment"
         android:name="com.mcode.mercadolibre.fragment.MainFragment"
-        tools:layout="@layout/fragment_main"/>
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/navigation_main_fragment_to_search_fragment"
+            app:destination="@id/search_fragment"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/search_fragment"
+        android:name="com.mcode.mercadolibre.fragment.SearchFragment"
+        tools:layout="@layout/fragment_search"/>
+
 </navigation>
