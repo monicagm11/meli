@@ -1,4 +1,4 @@
-package com.mcode.mercadolibre
+package com.mcode.mercadolibre.repositories
 
 import android.content.Context
 import android.content.SharedPreferences

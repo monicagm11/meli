@@ -1,6 +1,7 @@
-package com.mcode.mercadolibre
+package com.mcode.mercadolibre.usecases
 
 import android.content.Context
+import com.mcode.mercadolibre.repositories.PreferencesRepository
 
 class UseCaseSearchList(context: Context) {
 
