@@ -19,6 +19,8 @@
             android:drawableStart="@drawable/ic_recent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:fontFamily="@font/proximanova_regular"
+            android:gravity="center_vertical"
             android:padding="10dp"
             android:drawablePadding="15dp"
             android:textSize="20sp"
