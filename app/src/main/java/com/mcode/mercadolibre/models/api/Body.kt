@@ -13,7 +13,7 @@ data class Body (
 	@SerializedName("official_store_id") val officialStoreId : String,
 	@SerializedName("price") val price : Int,
 	@SerializedName("base_price") val basePrice : Int,
-	@SerializedName("original_price") val originalPrice : String,
+	@SerializedName("original_price") val originalPrice : Int,
 	@SerializedName("currency_id") val currencyId : String,
 	@SerializedName("initial_quantity") val initialQuantity : Int,
 	@SerializedName("available_quantity") val availableQuantity : Int,

@@ -15,7 +15,7 @@ class ApiRepository {
         CoroutineScope(Dispatchers.IO).launch {
             try {
 
-                var call = apiInterface.getProductList(siteId, searchKeyWord).execute()
+                val call = apiInterface.getProductList(siteId, searchKeyWord).execute()
 
                 if(call.isSuccessful){
                     var body = call.body()
