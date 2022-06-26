@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">MercadoLibre</string>
     <string name="search_hint">Buscar en Mercado Libre</string>
+    <string name="shipping_full">FULL</string>
+    <string name="shipping_send_free">Envío gratis</string>
 </resources>

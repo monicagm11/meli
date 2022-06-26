@@ -11,7 +11,7 @@ open class BaseUseCase {
     val numberFormat: NumberFormat = NumberFormat.getInstance(Locale.GERMANY)
 
     protected fun getInstallmentText(installments: Installments): String{
-        return "en ${installments.quantity} x ${numberFormat.format(installments.amount.roundToInt())}"
+        return "en ${installments.quantity} x $ ${numberFormat.format(installments.amount.roundToInt())}"
     }
 
     protected fun getDiscountText(regularAmount : Int, amount: Int ): String?{
