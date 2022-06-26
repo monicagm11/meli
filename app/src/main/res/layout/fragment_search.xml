@@ -43,7 +43,11 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginTop="10dp"
                     android:hint="@string/search_hint"
-                    android:imeOptions="actionSearch|actionGo"
+                    android:imeOptions="actionSearch|actionGo|actionDone"
+                    android:maxLines="1"
+                    android:lines="1"
+                    android:inputType="text"
+                    android:text="@={viewmodel.searchKeyWord}"
                     app:layout_constraintStart_toEndOf="@id/img_back"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 

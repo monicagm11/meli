@@ -27,6 +27,24 @@ class SearchFragment: Fragment() {
 
         viewModel?.getRecentSearchList()
 
+        configurateSearchEditText()
+
         return binding.root
+    }
+
+    private fun configurateSearchEditText(){
+        binding.edtSearchKeyword.setOnEditorActionListener { _, _, _ ->
+            if (!viewModel!!.searchKeyWord.value.isNullOrBlank()) {
+                viewModel!!.setSearchKeyWordSelected(viewModel!!.searchKeyWord.value!!)
+                navigateToPlp()
+                false
+            } else {
+                true
+            }
+        }
+    }
+
+    fun navigateToPlp(){
+
     }
 }
