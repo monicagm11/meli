@@ -3,8 +3,9 @@ package com.mcode.mercadolibre.viewmodels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 
-class MainFragmentViewModel(app: Application): AndroidViewModel(app) {
+class MainFragmentViewModel: ViewModel() {
 
     val goSearchNavigation = MutableLiveData<Boolean?>()
 

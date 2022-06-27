@@ -18,11 +18,25 @@
     <fragment
         android:id="@+id/search_fragment"
         android:name="com.mcode.mercadolibre.fragment.SearchFragment"
-        tools:layout="@layout/fragment_search"/>
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/navigation_search_fragment_to_plp_fragment"
+            app:destination="@id/plp_fragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/plp_fragment"
         android:name="com.mcode.mercadolibre.fragment.PlpFragment"
-        tools:layout="@layout/fragment_plp"/>
+        tools:layout="@layout/fragment_plp">
+        <argument
+            android:name="searchKeyWord"
+            app:argType="string"/>
+
+        <action
+            android:id="@+id/navigation_plp_fragment_to_search_fragment"
+            app:destination="@id/search_fragment"
+            />
+
+    </fragment>
 
 </navigation>

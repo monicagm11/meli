@@ -18,22 +18,43 @@ class SearchFragmentViewModel(app: Application) : AndroidViewModel(app) {
 
     var searchKeyWord = MutableLiveData<String>()
     var searchKeyWordSelected = MutableLiveData<String>()
+    var navigateToPlp = MutableLiveData<Boolean?>()
+
 
     fun getRecentSearchList(){
         recentSearchList = useCaseSearchList.getSearchList()
         val adapter = RecentSearchAdapter(recentSearchList)
         recentSearchAdapter.value = adapter
         adapter.notifyDataSetChanged()
+        initObservables()
 
+    }
+
+    fun initObservables(){
+        recentSearchAdapter.value!!.searchItemSelected.observeForever {
+            it?.let {
+                setSearchKeyWordSelected(it)
+                recentSearchAdapter.value!!.searchItemSelected.value = null
+            }
+        }
     }
 
     fun setSearchKeyWordSelected(searchKeyword: String){
         searchKeyWordSelected.value = searchKeyword
         saveSearchKeyword()
+        initNavigateToPlp()
     }
 
-    fun saveSearchKeyword(){
+    private fun saveSearchKeyword(){
         useCaseSearchList.saveNewSearch(searchKeyWordSelected.value!!, recentSearchList)
+    }
+
+    fun initNavigateToPlp(){
+        navigateToPlp.value = true
+    }
+
+    fun clearNavigateToPlp(){
+        navigateToPlp.value = null
     }
 
 

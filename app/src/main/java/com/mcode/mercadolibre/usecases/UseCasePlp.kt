@@ -28,22 +28,26 @@ class UseCasePlp: BaseUseCase() {
         val tags = results.shipping.tags
         val isFree = tags.contains(Constants.SHIPPING_FREE)
         val isFull = tags.contains(Constants.SHIPPING_FULL)
+        var installmentText: String? = null
+        results.installments?.let {
+            installmentText = getInstallmentText(it)
+        }
         return PlpItem(id = results.id,
             title = results.title,
             price = pricePlp,
             imgUrl = results.thumbnail,
-            installments = getInstallmentText(results.installments),
+            installments = installmentText,
             freeSend = isFree,
             fullSend = isFull
         )
     }
 
-    private fun getPrice(prices:List<PriceItem>): PriceItem {
+    fun getPrice(prices:List<PriceItem>): PriceItem {
         var priceSelected = prices.find { price -> price.type == Constants.PRICE_PROMOTIONAL }
         return priceSelected ?: prices[0]
     }
 
-    private fun getPricePlp(priceItem: PriceItem): PricePlp {
+    fun getPricePlp(priceItem: PriceItem): PricePlp {
         var discountValue: String? = null
         if(priceItem.type == Constants.PRICE_PROMOTIONAL && priceItem.regularAmount > 0){
             discountValue = getDiscountText(priceItem.regularAmount, priceItem.amount)

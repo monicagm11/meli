@@ -22,7 +22,7 @@ data class Results (
 	@SerializedName("thumbnail") val thumbnail : String,
 	@SerializedName("thumbnail_id") val thumbnailId : String,
 	@SerializedName("accepts_mercadopago") val acceptsMercadopago : Boolean,
-	@SerializedName("installments") val installments : Installments,
+	@SerializedName("installments") val installments : Installments?,
 	@SerializedName("address") val address : Address,
 	@SerializedName("shipping") val shipping : Shipping,
 	@SerializedName("seller_address") val sellerAddress : SellerAddress,

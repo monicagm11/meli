@@ -12,7 +12,7 @@ class UseCaseSearchList(context: Context) {
     }
 
     fun saveNewSearch(newSearch: String, searchList: ArrayList<String>){
-        val list = validateNewSearch(newSearch, searchList)
+        val list = validateNewSearch(newSearch.trim(), searchList)
         preferencesRepository.saveSearchList(list)
     }
 
@@ -23,10 +23,8 @@ class UseCaseSearchList(context: Context) {
             var previewSearchIndex = searchList.indexOfFirst { it == newSearch }
             if(previewSearchIndex > 0){
                 searchList.removeAt(previewSearchIndex)
-                searchList.add(0, newSearch)
-            }else{
-                searchList.add(0, newSearch)
             }
+            searchList.add(0, newSearch)
         }
 
         return if(searchList.size>10){
