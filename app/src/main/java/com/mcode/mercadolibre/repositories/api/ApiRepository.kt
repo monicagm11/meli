@@ -1,5 +1,6 @@
 package com.mcode.mercadolibre.repositories.api
 
+import com.mcode.mercadolibre.BuildConfig
 import com.mcode.mercadolibre.models.api.ProductResponse
 import com.mcode.mercadolibre.models.api.SearchResponse
 import kotlinx.coroutines.CoroutineScope
@@ -9,13 +10,12 @@ import kotlinx.coroutines.launch
 class ApiRepository {
 
     private val apiInterface: ApiInterface = ApiRetrofit().getRetrofit().create(ApiInterface::class.java)
-    private val siteId = "MCO"
 
     fun searchProductsByKeyWord(searchKeyWord: String, onSuccess: (SearchResponse)->Unit, onFailure: () -> Unit){
         CoroutineScope(Dispatchers.IO).launch {
             try {
 
-                val call = apiInterface.getProductList(siteId, searchKeyWord).execute()
+                val call = apiInterface.getProductList(BuildConfig.SITE_ID, searchKeyWord).execute()
 
                 if(call.isSuccessful){
                     var body = call.body()

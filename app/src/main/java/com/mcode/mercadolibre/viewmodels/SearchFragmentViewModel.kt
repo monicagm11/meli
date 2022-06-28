@@ -40,7 +40,7 @@ class SearchFragmentViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun setSearchKeyWordSelected(searchKeyword: String){
-        searchKeyWordSelected.value = searchKeyword
+        searchKeyWordSelected.value = searchKeyword.trim()
         saveSearchKeyword()
         initNavigateToPlp()
     }

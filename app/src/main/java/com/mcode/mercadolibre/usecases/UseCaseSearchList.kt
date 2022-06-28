@@ -6,13 +6,14 @@ import com.mcode.mercadolibre.repositories.PreferencesRepository
 class UseCaseSearchList(context: Context) {
 
     val preferencesRepository : PreferencesRepository =  PreferencesRepository(context)
+    val MAX_SEARCH = 10
 
     fun getSearchList(): ArrayList<String>{
         return preferencesRepository.getSearchList()
     }
 
     fun saveNewSearch(newSearch: String, searchList: ArrayList<String>){
-        val list = validateNewSearch(newSearch.trim(), searchList)
+        val list = validateNewSearch(newSearch, searchList)
         preferencesRepository.saveSearchList(list)
     }
 
@@ -27,11 +28,10 @@ class UseCaseSearchList(context: Context) {
             searchList.add(0, newSearch)
         }
 
-        return if(searchList.size>10){
-            searchList.take(10) as ArrayList<String>
-        }else{
-            searchList
-        }
+        val length = Math.min(MAX_SEARCH, searchList.size)
+
+        return searchList.take(length) as ArrayList<String>
+
 
     }
 

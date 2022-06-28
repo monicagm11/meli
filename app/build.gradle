@@ -16,6 +16,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "URL_BASE", "\"https://api.mercadolibre.com/\""
+        buildConfigField "String", "SITE_ID", "\"MCO\""
     }
 
     buildTypes {
