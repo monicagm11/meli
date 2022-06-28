@@ -5,16 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.mcode.mercadolibre.MainActivity
 import com.mcode.mercadolibre.viewmodels.PlpViewModel
 import com.mcode.mercadolibre.R
 import com.mcode.mercadolibre.databinding.FragmentPlpBinding
 
-class PlpFragment: Fragment() {
+class PlpFragment: BaseFragment() {
 
     var binding: FragmentPlpBinding? = null
     lateinit var viewModel: PlpViewModel
@@ -74,9 +72,7 @@ class PlpFragment: Fragment() {
         findNavController().navigate(PlpFragmentDirections.navigationPlpFragmentToPdpFragment(productId))
     }
 
-    fun onBack(){
-        (activity as MainActivity).onBackPressed()
-    }
+
 
 
 }

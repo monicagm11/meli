@@ -5,15 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.mcode.mercadolibre.MainActivity
 import com.mcode.mercadolibre.R
 import com.mcode.mercadolibre.databinding.FragmentSearchBinding
 import com.mcode.mercadolibre.viewmodels.SearchFragmentViewModel
 
-class SearchFragment: Fragment() {
+class SearchFragment: BaseFragment() {
     lateinit var binding: FragmentSearchBinding
     var viewModel: SearchFragmentViewModel? = null
 
@@ -67,7 +65,5 @@ class SearchFragment: Fragment() {
         findNavController().navigate(SearchFragmentDirections.navigationSearchFragmentToPlpFragment(viewModel!!.searchKeyWordSelected.value!!))
     }
 
-    fun onBack(){
-        (activity as MainActivity).onBackPressed()
-    }
+
 }
