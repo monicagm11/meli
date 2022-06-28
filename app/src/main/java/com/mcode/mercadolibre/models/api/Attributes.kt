@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class Attributes (
 
 	@SerializedName("value_id") val valueId : Int,
-	@SerializedName("value_name") val valueName : String,
+	@SerializedName("value_name") val valueName : String? = null,
 	@SerializedName("values") val values : List<ValueAttributes>,
 	@SerializedName("attribute_group_name") val attributeGroupName : String,
 	@SerializedName("id") val id : String,

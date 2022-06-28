@@ -15,7 +15,7 @@ data class Prices (
 data class PriceItem(
 	@SerializedName("id") val id : String,
 	@SerializedName("type") val type : String,
-	@SerializedName("amount") val amount : Int,
-	@SerializedName("regular_amount") val regularAmount : Int,
+	@SerializedName("amount") val amount : Float,
+	@SerializedName("regular_amount") val regularAmount : Float,
 	@SerializedName("currency_id") val currencyId : String
 )
