@@ -35,10 +35,15 @@ class PlpFragment: Fragment() {
             viewModel.searchKeyWord.value = args.searchKeyWord
         }
 
-        viewModel.getPlpListBySearchKeyWord()
+        if(viewModel.isFirstTime){
+            viewModel.initViewModel()
+            viewModel.getPlpListBySearchKeyWord()
+            viewModel.isFirstTime = false
+        }
+
         initObservables()
 
-        binding!!.imgBack!!.setOnClickListener {
+        binding!!.imgBack.setOnClickListener {
             onBack()
         }
 
@@ -52,10 +57,21 @@ class PlpFragment: Fragment() {
                 viewModel.clearNavigateToSearch()
             }
         }
+
+        viewModel.itemPdpSelected.observe(viewLifecycleOwner){
+            it?.let {
+                navigateToPdp(it)
+                viewModel.clearItemPlpSelected()
+            }
+        }
     }
 
     fun navigateToSearch(){
         findNavController().navigate(PlpFragmentDirections.navigationPlpFragmentToSearchFragment())
+    }
+
+    fun navigateToPdp(productId: String){
+        findNavController().navigate(PlpFragmentDirections.navigationPlpFragmentToPdpFragment(productId))
     }
 
     fun onBack(){

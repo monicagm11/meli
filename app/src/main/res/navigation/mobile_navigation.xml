@@ -21,7 +21,9 @@
         tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/navigation_search_fragment_to_plp_fragment"
-            app:destination="@id/plp_fragment"/>
+            app:destination="@id/plp_fragment"
+            app:popUpTo="@id/search_fragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
@@ -37,6 +39,25 @@
             app:destination="@id/search_fragment"
             />
 
+        <action
+            android:id="@+id/navigation_plp_fragment_to_pdp_fragment"
+            app:destination="@id/pdp_fragment"
+            />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/pdp_fragment"
+        android:name="com.mcode.mercadolibre.fragment.PdpFragment"
+        tools:layout="@layout/fragment_pdp">
+        <argument
+            android:name="productId"
+            app:argType="string"/>
+
+        <action
+            android:id="@+id/navigation_pdp_fragment_to_search_fragment"
+            app:destination="@id/search_fragment"
+            />
     </fragment>
 
 </navigation>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="attribute"
+            type="com.mcode.mercadolibre.models.AttributePdp" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:textSize="16sp"
+            tools:text="Garantía: 3 meses "
+            android:text="@{attribute.name + ` : ` + attribute.valueName}"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_item_attribute"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

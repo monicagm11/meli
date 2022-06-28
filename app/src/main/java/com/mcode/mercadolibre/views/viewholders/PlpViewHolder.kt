@@ -9,18 +9,8 @@ import com.mcode.mercadolibre.models.plp.PlpItem
 
 class PlpViewHolder(var binding: ViewholderPlpBinding): RecyclerView.ViewHolder(binding.root) {
 
-    fun bindData(plpItem: PlpItem, context: Context){
+    fun bindData(plpItem: PlpItem){
         binding.plpItem = plpItem
-
-        val url = plpItem.imgUrl
-
-        if(url!=null && url.isNotBlank()){
-            Glide.with(context)
-                .load(url)
-                .placeholder(R.drawable.ic_no_image)
-                .fitCenter()
-                .into(binding.imgPlp)
-        }
 
         binding.executePendingBindings()
     }

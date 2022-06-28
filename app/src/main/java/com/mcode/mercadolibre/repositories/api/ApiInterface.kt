@@ -14,6 +14,6 @@ interface ApiInterface {
     fun getProductList(@Path("siteId") siteId: String, @Query("q") searchKeyWord: String): Call<SearchResponse>
 
     @GET("items")
-    fun getProductDetail(@Query("ids") productId: String): Call<ProductResponse>
+    fun getProductDetail(@Query("ids") productId: String): Call<List<ProductResponse>>
 
 }

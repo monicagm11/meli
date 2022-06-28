@@ -14,7 +14,7 @@ open class BaseUseCase {
         return "en ${installments.quantity} x $ ${numberFormat.format(installments.amount.roundToInt())}"
     }
 
-    fun getDiscountText(regularAmount : Int, amount: Int ): String?{
+    fun getDiscountText(regularAmount : Float, amount: Float ): String?{
         var discountValue = 0
         if(regularAmount > 0){
             discountValue = ((regularAmount - amount) * 100 / regularAmount).toDouble()

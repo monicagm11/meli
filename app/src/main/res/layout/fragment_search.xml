@@ -60,6 +60,7 @@
                         android:inputType="text"
                         android:background="@color/white"
                         android:text="@={viewmodel.searchKeyWord}"
+                        android:focusedByDefault="true"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 

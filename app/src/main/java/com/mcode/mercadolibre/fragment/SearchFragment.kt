@@ -49,7 +49,7 @@ class SearchFragment: Fragment() {
     }
 
     private fun configureBackButton(){
-        binding?.imgBack.setOnClickListener {
+        binding.imgBack.setOnClickListener {
             onBack()
         }
     }

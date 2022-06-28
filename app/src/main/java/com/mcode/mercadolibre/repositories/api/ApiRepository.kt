@@ -39,7 +39,7 @@ class ApiRepository {
 
                 if(call.isSuccessful){
                     var body = call.body()
-                    onSuccess(body)
+                    onSuccess(body[0])
                 }else{
                     onFailure()
                 }

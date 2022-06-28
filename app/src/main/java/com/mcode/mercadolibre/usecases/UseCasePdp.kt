@@ -44,14 +44,14 @@ class UseCasePdp : BaseUseCase(){
     private fun getAttributesList(attributesList: List<Attributes>): List<AttributePdp>{
         return attributesList.map { attribute -> AttributePdp( id = attribute.id,
             name = attribute.name,
-            valueName = attribute.valueName) }
+            valueName = attribute.valueName.orEmpty()) }
     }
 
     private fun getLocationText(sellerAddress: SellerAddress): String{
         return "${sellerAddress.city.name}, ${sellerAddress.state.name}"
     }
 
-    private fun getPricePdp(originalPrice: Int, price: Int, currencyId: String):PricePlp{
+    private fun getPricePdp(originalPrice: Float, price: Float, currencyId: String):PricePlp{
         return PricePlp(price = "$ ${numberFormat.format(price)}",
             currencyId = currencyId,
             discount = getDiscountText(originalPrice, price))
