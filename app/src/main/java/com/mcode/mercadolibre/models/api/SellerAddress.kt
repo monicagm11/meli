@@ -9,8 +9,8 @@ data class SellerAddress (
 	@SerializedName("address_line") val addressLine : String? = null,
 	@SerializedName("zip_code") val zipCode : String? = null,
 	@SerializedName("country") val country : Country? = null,
-	@SerializedName("state") val state : State? = null,
-	@SerializedName("city") val city : City? = null,
+	@SerializedName("state") val state : State,
+	@SerializedName("city") val city : City,
 	@SerializedName("latitude") val latitude : String? = null,
 	@SerializedName("longitude") val longitude : String? = null
 )
