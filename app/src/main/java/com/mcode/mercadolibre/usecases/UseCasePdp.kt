@@ -9,31 +9,43 @@ import com.mcode.mercadolibre.utils.Constants
 
 class UseCasePdp : BaseUseCase(){
 
-    fun getDetailProductList(productId: String, onSuccess: (PdpDetail)->Unit, onFailure: () -> Unit){
+    fun getDetailProductList(productId: String, onSuccess: (PdpDetail)->Unit, onFailure: (String) -> Unit){
         ApiRepository().getProductDetail(
             productId = productId,
             onSuccess = {productResponse ->
                 val result = productResponse.body
-                val pdpItem = getPdpItem(result)
-                onSuccess(pdpItem)
+                result?.let {
+                    val pdpItem = getPdpItem(it)
+                    onSuccess(pdpItem)
+                }?: run{
+                    onFailure(Constants.ERROR_API_EMPTY)
+                }
+
             },
             onFailure = {
-                onFailure()
+                onFailure(it)
             })
     }
 
     private fun getPdpItem(body: Body): PdpDetail{
         val pricePlp = getPricePdp(body.originalPrice, body.price, body.currencyId)
-        val tags = body.shipping.tags
-        val isFree = tags.contains(Constants.SHIPPING_FREE)
-        val isFull = tags.contains(Constants.SHIPPING_FULL)
+        val tags = body.shipping?.tags
+        var isFree = false
+        var isFull = false
+
+        tags?.let {
+            isFree = it.contains(Constants.SHIPPING_FREE)
+            isFull = it.contains(Constants.SHIPPING_FULL)
+        }
+
+
         return PdpDetail( id = body.id,
             title = body.title,
             price = pricePlp,
-            imgUrl = getPicturesUrl(body.pictures),
+            imgUrl = getPicturesUrl(body.pictures.orEmpty()),
             freeSend = isFree,
             fullSend = isFull,
-            attributePdp = getAttributesList(body.attributes),
+            attributePdp = getAttributesList(body.attributes.orEmpty()),
             location = getLocationText(body.sellerAddress))
     }
 
@@ -42,8 +54,10 @@ class UseCasePdp : BaseUseCase(){
     }
 
     private fun getAttributesList(attributesList: List<Attributes>): List<AttributePdp>{
-        return attributesList.map { attribute -> AttributePdp( id = attribute.id,
-            name = attribute.name,
+        return attributesList.filter{ attributes->
+            return@filter !attributes.name.isNullOrBlank() && !attributes.valueName.isNullOrBlank()
+        }.map { attribute -> AttributePdp( id = attribute.id,
+            name = attribute.name.orEmpty(),
             valueName = attribute.valueName.orEmpty()) }
     }
 

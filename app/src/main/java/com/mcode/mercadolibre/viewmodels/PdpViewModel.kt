@@ -1,14 +1,20 @@
 package com.mcode.mercadolibre.viewmodels
 
+import android.app.Application
+import android.content.Context
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mcode.mercadolibre.models.PdpDetail
 import com.mcode.mercadolibre.usecases.UseCasePdp
+import com.mcode.mercadolibre.utils.Constants
+import com.mcode.mercadolibre.utils.NetWorkUtils
 import com.mcode.mercadolibre.views.adapters.AttributePdpAdapter
 import com.mcode.mercadolibre.views.adapters.ImagesPdpAdapter
 
-class PdpViewModel(): ViewModel() {
+class PdpViewModel(app: Application): AndroidViewModel(app) {
 
+    val context: Context = app
     var isFirstTime = true
 
     var useCasePdp = UseCasePdp()
@@ -22,19 +28,26 @@ class PdpViewModel(): ViewModel() {
     var showLoading = MutableLiveData<Boolean>()
     var showPdpContent = MutableLiveData<Boolean>()
     var showEmptyState = MutableLiveData<Boolean>()
+    var errorEmptyState = MutableLiveData<String>()
 
     var navigateToSearch = MutableLiveData<Boolean?>()
 
 
     fun getPdpDetailById(){
         showLoading()
+        if(NetWorkUtils.isOnline(context)){
         useCasePdp.getDetailProductList(productId,
             onSuccess = {detail ->
                 pdpDetail.postValue(detail)
             },
             onFailure = {
+                errorEmptyState.postValue(it)
                 showEmptyState()
             })
+        }else{
+            errorEmptyState.postValue(Constants.ERROR_API_INTERNET)
+            showEmptyState()
+        }
     }
 
     fun initObservers(){

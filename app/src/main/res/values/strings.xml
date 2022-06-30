@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MercadoLibre</string>
+    <string name="app_name">Mercado Libre</string>
     <string name="search_hint">Buscar en Mercado Libre</string>
     <string name="pdp_empty_label">Ha ocurrido un error, por favor inténtalo más tarde</string>
     <string name="plp_empty_label">No hemos encontrado resultados para tu búsqueda, por favor intenta con un nuevo término</string>
@@ -7,5 +7,7 @@
     <string name="preferences_tag_list">search_list</string>
     <string name="shipping_full">FULL</string>
     <string name="shipping_send_free">Envío gratis</string>
+
+
 
 </resources>

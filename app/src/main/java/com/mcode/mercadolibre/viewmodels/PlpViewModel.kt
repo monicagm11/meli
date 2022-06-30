@@ -1,13 +1,20 @@
 package com.mcode.mercadolibre.viewmodels
 
+import android.app.Application
+import android.content.Context
+import android.net.Network
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mcode.mercadolibre.models.plp.PlpItem
 import com.mcode.mercadolibre.usecases.UseCasePlp
+import com.mcode.mercadolibre.utils.Constants
+import com.mcode.mercadolibre.utils.NetWorkUtils
 import com.mcode.mercadolibre.views.adapters.PlpAdapter
 
-class PlpViewModel: ViewModel() {
+class PlpViewModel(application: Application): AndroidViewModel(application) {
 
+    val context: Context = application
     var isFirstTime: Boolean = true
     
     var useCasePlp: UseCasePlp = UseCasePlp()
@@ -17,6 +24,7 @@ class PlpViewModel: ViewModel() {
     var showLoading = MutableLiveData<Boolean>()
     var showRecyclerView = MutableLiveData<Boolean>()
     var showEmptyState = MutableLiveData<Boolean>()
+    var errorEmptyState = MutableLiveData<String>()
 
     var searchKeyWord = MutableLiveData<String>()
 
@@ -25,20 +33,23 @@ class PlpViewModel: ViewModel() {
     
     fun getPlpListBySearchKeyWord(){
         showLoading()
-        useCasePlp.getSearchProductList(searchKeyWord = searchKeyWord.value!!,
-            onSuccess = { list: List<PlpItem> ->
-            if(list.isNotEmpty()){
-                val adapter = PlpAdapter(list)
-                plpAdapter.postValue(adapter)
-                adapter.notifyDataSetChanged()
-                showRecyclerView()
-            }else{
-                showEmptyState()
-            }
+        if(NetWorkUtils.isOnline(context)){
+            useCasePlp.getSearchProductList(searchKeyWord = searchKeyWord.value!!,
+                onSuccess = { list: List<PlpItem> ->
+                    val adapter = PlpAdapter(list)
+                    plpAdapter.postValue(adapter)
+                    adapter.notifyDataSetChanged()
+                    showRecyclerView()
 
-        }, onFailure = {
+                }, onFailure = {
+                    errorEmptyState.postValue(it)
+                    showEmptyState()
+                })
+        }else{
+            errorEmptyState.postValue(Constants.ERROR_API_INTERNET)
             showEmptyState()
-        })
+        }
+
     }
 
     fun initViewModel(){

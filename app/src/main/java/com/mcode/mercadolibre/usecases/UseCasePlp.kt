@@ -9,25 +9,42 @@ import com.mcode.mercadolibre.utils.Constants
 
 class UseCasePlp: BaseUseCase() {
 
-    fun getSearchProductList(searchKeyWord: String, onSuccess: (List<PlpItem>)->Unit, onFailure: () -> Unit){
+    fun getSearchProductList(searchKeyWord: String, onSuccess: (List<PlpItem>)->Unit, onFailure: (String) -> Unit){
         ApiRepository().searchProductsByKeyWord(
             searchKeyWord = searchKeyWord,
             onSuccess = {searchResponse ->
                 val results = searchResponse.results
-                val plpItemList: List<PlpItem> = results.map { result -> getPlpItem(result) }
-                onSuccess(plpItemList)
+
+                results?.let {
+                    val plpItemList: List<PlpItem> = it.map { result -> getPlpItem(result) }
+                    if(!plpItemList.isNullOrEmpty()){
+                        onSuccess(plpItemList)
+                    }else{
+                        onFailure(Constants.ERROR_API_EMPTY)
+                    }
+
+                }?: run{
+                    onFailure(Constants.ERROR_API_EMPTY)
+                }
+
             },
             onFailure = {
-                onFailure()
+                onFailure(it)
             })
     }
 
     private fun getPlpItem (results: Results): PlpItem {
         val price = getPrice(results.prices.prices)
         val pricePlp = getPricePlp(price)
-        val tags = results.shipping.tags
-        val isFree = tags.contains(Constants.SHIPPING_FREE)
-        val isFull = tags.contains(Constants.SHIPPING_FULL)
+        val tags = results.shipping?.tags
+        var isFree = false
+        var isFull = false
+
+        tags?.let {
+            isFree = it.contains(Constants.SHIPPING_FREE)
+            isFull = it.contains(Constants.SHIPPING_FULL)
+        }
+
         var installmentText: String? = null
         results.installments?.let {
             installmentText = getInstallmentText(it)

@@ -198,10 +198,38 @@
             </androidx.core.widget.NestedScrollView>
         </LinearLayout>
 
-        <include
-            android:id="@+id/empty_layout"
-            android:visibility="@{viewmodel.showEmptyState? View.VISIBLE : View.GONE}"
-            layout="@layout/layout_empty_state"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{viewmodel.showEmptyState? View.VISIBLE: View.GONE}"
+            android:background="@color/plp_background">
+
+            <ImageView
+                android:id="@+id/img_empty"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/ic_shopping_bag"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:tint="@color/icon_tint_dark"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_empty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/img_empty"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@{viewmodel.errorEmptyState}"
+                android:gravity="center"
+                android:textSize="16sp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
