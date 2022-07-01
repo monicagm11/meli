@@ -6,13 +6,16 @@ import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
-import org.junit.*
+import org.junit.After
+import org.junit.Assert.assertTrue
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 
-class PlpViewModelTest {
+class PdpViewModelTest {
 
-    lateinit var plpViewModel: PlpViewModel
+    lateinit var pdpViewModel: PdpViewModel
     val thread = newSingleThreadContext("UI thread")
 
     var application: Application? = null
@@ -24,19 +27,7 @@ class PlpViewModelTest {
     fun setUp(){
         Dispatchers.setMain(thread)
         application = mockk(relaxUnitFun = true)
-        plpViewModel = PlpViewModel(application!!)
-    }
-
-    @Test
-    fun `startGoSearchNavigationCorrectly`() = runBlockingTest{
-        plpViewModel.initNavigateToSearch()
-        Assert.assertTrue(plpViewModel.navigateToSearch.value!!)
-    }
-
-    @Test
-    fun `clearGoSearchNavigationCorrectly`() = runBlockingTest{
-        plpViewModel.clearNavigateToSearch()
-        Assert.assertNull(plpViewModel.navigateToSearch.value)
+        pdpViewModel = PdpViewModel(application!!)
     }
 
     @After
@@ -46,6 +37,22 @@ class PlpViewModelTest {
         thread.close()
     }
 
+    @Test
+    fun `showLoadingCorrectly`(){
+        pdpViewModel.showLoading()
+        assertTrue(pdpViewModel.showLoading.value!!)
+    }
 
+    @Test
+    fun `showEmptyCorrectly`(){
+        pdpViewModel.showEmptyState()
+        assertTrue(pdpViewModel.showEmptyState.value!!)
+    }
+
+    @Test
+    fun `showPdpContentCorrectly`(){
+        pdpViewModel.showPdpContent()
+        assertTrue(pdpViewModel.showPdpContent.value!!)
+    }
 
 }

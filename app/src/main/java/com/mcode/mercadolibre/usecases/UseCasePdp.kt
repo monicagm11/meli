@@ -49,11 +49,11 @@ class UseCasePdp : BaseUseCase(){
             location = getLocationText(body.sellerAddress))
     }
 
-    private fun getPicturesUrl(pictureList: List<Pictures>): List<String>{
+    fun getPicturesUrl(pictureList: List<Pictures>): List<String>{
         return pictureList.map { it.url }
     }
 
-    private fun getAttributesList(attributesList: List<Attributes>): List<AttributePdp>{
+    fun getAttributesList(attributesList: List<Attributes>): List<AttributePdp>{
         return attributesList.filter{ attributes->
             return@filter !attributes.name.isNullOrBlank() && !attributes.valueName.isNullOrBlank()
         }.map { attribute -> AttributePdp( id = attribute.id,
@@ -61,7 +61,7 @@ class UseCasePdp : BaseUseCase(){
             valueName = attribute.valueName.orEmpty()) }
     }
 
-    private fun getLocationText(sellerAddress: SellerAddress): String{
+    fun getLocationText(sellerAddress: SellerAddress): String{
         return "${sellerAddress.city.name}, ${sellerAddress.state.name}"
     }
 
