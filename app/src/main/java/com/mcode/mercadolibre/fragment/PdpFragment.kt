@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.mcode.mercadolibre.R
 import com.mcode.mercadolibre.databinding.FragmentPdpBinding
@@ -38,7 +39,27 @@ class PdpFragment: BaseFragment() {
             viewModel.isFirstTime = false
         }
 
+        initObservables()
+
+        binding!!.imgBack.setOnClickListener {
+            onBack()
+        }
+
         return binding!!.root
+    }
+
+    fun initObservables(){
+        viewModel.navigateToSearch.observe(viewLifecycleOwner) {
+            it?.let {
+                navigateToSearch()
+                viewModel.clearNavigateToSearch()
+            }
+        }
+
+    }
+
+    fun navigateToSearch(){
+        findNavController().navigate(PdpFragmentDirections.navigationPdpFragmentToSearchFragment())
     }
 
 
